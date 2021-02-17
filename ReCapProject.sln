@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsleUI", "ConsleUII\Consl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{7345273C-6932-441D-B0E6-699478DEC3DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{6E2E996D-F2D4-47C1-919D-2916B43B9091}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{6E2E996D-F2D4-47C1-919D-2916B43B9091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1A8B7CA9-5650-4938-ADEA-6B8B90954575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1A8B7CA9-5650-4938-ADEA-6B8B90954575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Business.csproj", "{1EB4BF2E-C39B-46A5-9895-7DE3FAEF81A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{1EB4BF2E-C39B-46A5-9895-7DE3FAEF81A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{03F9B8FC-8F6A-44FC-AFA1-713951663A69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{1EB4BF2E-C39B-46A5-9895-7DE3FAEF81A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB4BF2E-C39B-46A5-9895-7DE3FAEF81A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB4BF2E-C39B-46A5-9895-7DE3FAEF81A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F9B8FC-8F6A-44FC-AFA1-713951663A69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F9B8FC-8F6A-44FC-AFA1-713951663A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F9B8FC-8F6A-44FC-AFA1-713951663A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F9B8FC-8F6A-44FC-AFA1-713951663A69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

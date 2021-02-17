@@ -9,7 +9,7 @@ namespace DataAccess.Abstract
 {
     public interface IEntityRepository<T> where T:class,IEntity,new()
     {
-        T GetById(Expression<Func<T, bool>> filter);//zorunlu
+        T Get(Expression<Func<T, bool>> filter);//zorunlu
         List<T> GetAll(Expression<Func<T,bool>> filter=null);
         void Add(T entity);
         void Update(T entity);

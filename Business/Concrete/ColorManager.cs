@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,35 +18,34 @@ namespace Business.Concrete
             _colorDal = brandDal;
         }
 
-        public void Add(Color entity)
-        {
-            _colorDal.Add(entity);
-        }
-
-        public void Delete(Color color)
+        public IResult Add(Color color)
         {
             _colorDal.Delete(color);
+            return new SuccessResult(Messages.Added);
         }
 
-        public List<Color> GetAll()
+        public IResult Delete(Color color)
         {
-            return _colorDal.GetAll();
-
+            _colorDal.Delete(color);
+            return new SuccessResult();
         }
 
-        public Color GetById(int id)
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetById(c => c.ColorId == id);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
 
-        public void Update(Color entity)
+        public IDataResult<List<Color>> GetById(int id)
         {
-            _colorDal.Update(entity);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(p => p.ColorId == id));
+
+        }
+        public IResult Update(Color color)
+        {
+            _colorDal.Delete(color);
+            return new SuccessResult();
         }
 
-        List<Color> IColorService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

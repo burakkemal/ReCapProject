@@ -12,7 +12,6 @@ namespace DataAccess.Abstract
 
         List<CarDetailDto> GetCarDetailDto();
         //List<CarDetail>
-        void Update(Car car);
-        void Delete(Car car); 
+       
     }
 }

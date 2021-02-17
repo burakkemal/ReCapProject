@@ -1,6 +1,7 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 using System;
 
 namespace ConsoleUI
@@ -14,40 +15,60 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal()); //InMemoryCarDal() 
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.UserId + " / " + user.FirstName + "  / " + user.LastName + " / " + user.Password);
+            }
+
+            //customerManager.Add(new Customer { CompanyName = "deneme", UserId = 1 });
+            //Console.WriteLine("Eklendi");
+
+            var result = rentalManager.Add(new Rental {CarId=1,CustomerId=1,RentDate=DateTime.Now});
+            Console.WriteLine(result.Message);
 
 
-            foreach (var car in carManager.GetCarDetailDto())
-            {
-                Console.WriteLine(car.Name+"/"+car.BrandName+"/"+car.ColorName+"/"+car.DailyPrice); 
-            }
-            Console.WriteLine("----------");
-            foreach (var colour in colorManager.GetAll()) 
-            {
-                Console.WriteLine(colour.ColorName); 
-            }
-            Console.WriteLine("-----------");
-            foreach (var brands in brandManager.GetAll())
-            {
-                Console.WriteLine(brands.BrandName);
-            }
-            Console.WriteLine("-------");
+            //ilişkiliListeleme(carManager);
 
-            //foreach (var cars in carManager.GetAll())
+
+            //Console.WriteLine("----------");
+            //foreach (var colour in colorManager.GetAll())
             //{
-            //    Console.WriteLine(cars.CarName);
+            //    Console.WriteLine(colour.ColorName);
             //}
-            Console.WriteLine("-------------");
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.CarName);
-            }
-            Console.WriteLine(carManager.GetById(1).CarName);
-            Console.WriteLine(colorManager.GetById(2).ColorName);
-            Console.WriteLine(brandManager.GetById(1).BrandName);
-            Console.WriteLine("-----------");
+            //Console.WriteLine("-----------");
+            //foreach (var brands in brandManager.GetAll())
+            //{
+            //    Console.WriteLine(brands.BrandName);
+            //}
+            //Console.WriteLine("-------");
+
+            ////foreach (var cars in carManager.GetAll())
+            ////{
+            ////    Console.WriteLine(cars.CarName);
+            ////}
+            //Console.WriteLine("-------------");
+            //foreach (var car in carManager.GetAll())
+            //{
+            //    Console.WriteLine(car.CarName);
+            //}
+
+            //carManager.Add(new Car() { BrandId = 1, CarName = "Ford", ColorId = 1, DailyPrice = 180, Description = "Alırsan ford olursun lord", ModelYear = 2020 });
+            //Console.WriteLine(carManager.GetById(1));
+            //Console.WriteLine(colorManager.GetById(2).ColorName);
+            //Console.WriteLine(brandManager.GetById(1).BrandName);
+            //Console.WriteLine("-----------");
 
 
+            //carManager.Update(new Car { CarId = 1, CarName = "Ford", ColorId = 1, DailyPrice = 180, Description = "Alırsan ford ol lord", ModelYear = 2020 });
 
+
+            //foreach (var car in carManager.GetCarDetailDto())
+            //{
+            //    Console.WriteLine(car.Name + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+            //}
 
 
 
@@ -82,6 +103,23 @@ namespace ConsoleUI
             //}
 
 
+        }
+
+        private static void ilişkiliListeleme(CarManager carManager)
+        {
+            var result = carManager.GetCarDetailDto();
+
+            if (result.Success)
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.Name + "/" + car.BrandName + "/" + car.ColorName + "/" + car.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
         }
     }
 }
