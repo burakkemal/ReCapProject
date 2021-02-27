@@ -18,8 +18,11 @@ namespace Business.Constants
         public static string Listed = "Listelendi";
         public static string MaintenanceTime = "bakımda";
         public static string updatedCar = "araba güncellendi";
-        public static string NotRentable="Araba kiralanamaz";
+        public static string NotRentable = "Araba kiralanamaz";
         public static string RentadMessage = "Kiralandı";
-
+        public static string CarImageLimitExceeded = "Max resim sayısına ulaşıldı";
+        public static string CarImageCarIdInvalid = "Araba id'si girilmedi";
+        public static string CarImageDeleted = "Araba resmi silindi";
+        internal static string CarImageUpdated="Araba resmi güncellendi";
     }
 }
