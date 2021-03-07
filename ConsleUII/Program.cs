@@ -12,22 +12,22 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            CarManager carManager = new CarManager(new EfCarDal()); //InMemoryCarDal() 
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            UserManager userManager = new UserManager(new EfUserDal());
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            foreach (var user in userManager.GetAll().Data)
-            {
-                Console.WriteLine(user.UserId + " / " + user.FirstName + "  / " + user.LastName + " / " + user.Password);
-            }
+            //CarManager carManager = new CarManager(new EfCarDal()); //InMemoryCarDal() 
+            //BrandManager brandManager = new BrandManager(new EfBrandDal());
+            //ColorManager colorManager = new ColorManager(new EfColorDal());
+            //UserManager userManager = new UserManager(new EfUserDal());
+            //CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            ////foreach (var user in userManager.GetAll().Data)
+            ////{
+            ////    Console.WriteLine(user.UserId + " / " + user.FirstName + "  / " + user.LastName + " / " + user.Password);
+            ////}
 
-            //customerManager.Add(new Customer { CompanyName = "deneme", UserId = 1 });
-            //Console.WriteLine("Eklendi");
+            ////customerManager.Add(new Customer { CompanyName = "deneme", UserId = 1 });
+            ////Console.WriteLine("Eklendi");
 
-            var result = rentalManager.Add(new Rental {CarId=1,CustomerId=1,RentDate=DateTime.Now});
-            Console.WriteLine(result.Message);
+            //var result = rentalManager.Add(new Rental {CarId=1,CustomerId=1,RentDate=DateTime.Now});
+            //Console.WriteLine(result.Message);
 
 
             //ilişkiliListeleme(carManager);

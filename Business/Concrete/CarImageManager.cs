@@ -24,34 +24,29 @@ namespace Business.Concrete
         {
             _carImageDal = carImageDal;
         }
-        [ValidationAspect(typeof(CarImageValidator))]
-        public IResult Add(IFormFile file, CarImage carImage)
+        [ValidationAspect(typeof(CarImageValidator))]       
+        public IResult Add(CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimitExceeded(carImage.CarId));
             if (result != null)
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.Add(file);
-            carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult();
         }
 
         public IResult Delete(CarImage carImage)
         {
-            IResult result = BusinessRules.Run(FileHelper.Delete(_carImageDal.Get(cim => cim.Id == carImage.Id).ImagePath));
-            if (result != null)
-            {
-                return result;
-            }
-
             _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
-        public IDataResult<List<CarImage>> GetAll()
+        public IDataResult<List<CarImage>> GetAll(int carId)
         {
+            var result = _carImageDal.GetAll(x => x.CarId == carId);
+            if (result.Count == 0)
+                result.Add(new CarImage { CarId = carId, ImagePath = "DefaultImage.jpg" });
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
@@ -70,12 +65,17 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
         }
         [ValidationAspect(typeof(CarImageValidator))]
-        public IResult Update(IFormFile file, CarImage carImage)
+        public IResult Update(CarImage carImage)
         {
-            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(cim => cim.Id == carImage.Id).ImagePath, file);
-            carImage.Date = DateTime.Now;
-            _carImageDal.Update(carImage);
-            return new SuccessResult(Messages.CarImageUpdated);
+            var result = _carImageDal.Get(c => c.Id == carImage.Id);
+            if (result != null)
+            {
+                result.ImagePath = carImage.ImagePath;
+                result.Date = DateTime.Now;
+                _carImageDal.Update(carImage);
+                return new SuccessResult(Messages.UpdatedCarImage);
+            }
+            return new ErrorResult(Messages.ErrorUpdateCarImage);
         }
         private IResult CheckIfImageLimitExceeded(int carId)
         {
