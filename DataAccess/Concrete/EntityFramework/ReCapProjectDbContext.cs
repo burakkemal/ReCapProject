@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ReCapProject;Trusted_Connection=true;");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-FIFB23S\SQLEXPRESS;Initial Catalog=ReCapProject;Trusted_Connection=true;");
         }
 
         public DbSet<Car> Cars { get; set; }
