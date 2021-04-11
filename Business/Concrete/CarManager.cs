@@ -24,14 +24,16 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+        ICarImageService _carImageService;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal, ICarImageService carImageService)
         {
             _carDal = carDal;
+            _carImageService = carImageService;
         }
 
         [ValidationAspect(typeof(CarValidator))]
-        [CacheRemoveAspect("ICar.Get")]
+       // [CacheRemoveAspect("ICar.Get")]
         [SecuredOperation("car.add,admin")] //Hash ve Encription
         //bu kullanıcının admin veya product.add claim'ine sahip olması gerekiyor.
         //encription - geri dönüşü olan veridir. verinin tamamı encrip edilir. encirip şifrelemek decrip çözmek oluyor. 
@@ -56,8 +58,8 @@ namespace Business.Concrete
         [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
-           //Thread.Sleep(6000);
-            if (DateTime.Now.Hour == 16)
+            //Thread.Sleep(6000);
+            if (DateTime.Now.Hour == 10)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
@@ -70,9 +72,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id));
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.Listed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailDto(c => c.BrandId == brandId), Messages.Listed);
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
@@ -90,12 +92,23 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailDto(), Messages.Listed);
         }
+        public IDataResult<List<CarDetailDto>> GetCarDetailByCarId(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailDto(c=>c.CarId==carId));
+        }
         [TransactionScopeAspect]
         public IResult AddTransactionalTest(Car car)
         {
             _carDal.Update(car);
             _carDal.Add(car);
             return new SuccessResult(Messages.updatedCar);
+        }       
+
+        public IDataResult<List<CarDetailDto>> GetCarsFiltered(int brandId, int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailDto(c=> c.ColorId == colorId && c.BrandId == brandId), Messages.succeed);
         }
+
     }
 }
+

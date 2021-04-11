@@ -1,13 +1,12 @@
 ﻿using Entities.Concrete;
-using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IRentalDal:IEntityRepository<Rental>
+  public interface IPaymentDal:IEntityRepository<Payment>
     {
-        List<RentalDetailDto> GetAllRentalDetail();
+
     }
 }

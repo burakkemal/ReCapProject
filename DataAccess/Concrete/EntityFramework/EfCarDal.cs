@@ -13,20 +13,31 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, ReCapProjectDbContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetailDto()
+        public List<CarDetailDto> GetCarDetailDto(Expression<Func<CarDetailDto, bool>> filter = null)
         {
-            using (ReCapProjectDbContext context=new ReCapProjectDbContext())
+            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
             {
-                var result = from c in context.Cars
-                             join b in context.Brands
-                             on c.BrandId equals b.BrandId
-                             join r in context.Colors
-                             on c.ColorId equals r.ColorId
-                             select new CarDetailDto { Name=c.CarName, BrandId = c.BrandId, BrandName = b.BrandName, Id = c.CarId, 
-                                                     ColorId = c.ColorId, DailyPrice = c.DailyPrice, Description = c.Description,  
-                                                     ModelYear = c.ModelYear, ColorName = r.ColorName};
-                return result.ToList();
-            } 
-        }
+                var result = from cr in context.Cars 
+                             join b in context.Brands on cr.BrandId equals b.BrandId
+                             join cl in context.Colors on cr.ColorId equals cl.ColorId
+                             select new CarDetailDto
+                             {
+                                 CarId = cr.CarId,
+                                 BrandId = b.BrandId,
+                                 BrandName = b.BrandName,
+                                 ColorId = cl.ColorId,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = cr.DailyPrice,
+                                 ModelYear = cr.ModelYear,
+                                 Description = cr.Description,
+                                 Images=(from i in context.CarImages where i.CarId==cr.CarId select i.ImagePath).ToList()                                 
+                             };
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
+
+
+    }
+
+}       
     }
 }
+

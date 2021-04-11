@@ -88,6 +88,8 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.ConfigureCustomExceptionMiddleware();
+
             app.UseCors(builder => builder.WithOrigins("http://localhost:4200/").AllowAnyHeader().AllowAnyOrigin()); //port izni 
 
             app.UseHttpsRedirection();
@@ -95,6 +97,8 @@ namespace WebAPI
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 

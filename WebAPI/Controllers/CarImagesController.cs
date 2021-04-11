@@ -23,17 +23,17 @@ namespace WebAPI.Controllers
             _carImageService = carImageService;
         }
         [HttpGet("getall")]
-        public IActionResult GetAll(int carId)
+        public IActionResult GetAll()
         {
-            var result = _carImageService.GetAll(carId);
+            var result = _carImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-        }
+        }        
         [HttpGet("getbyid")]
-        public IActionResult GetById([FromForm(Name = ("Id"))] int id)
+        public IActionResult GetById(int id)
         {
             var result = _carImageService.GetById(id);
             if (result.Success)
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getbycarid")]
-        public IActionResult GetByCarId([FromForm(Name = ("CarId"))] int carId)
+        public IActionResult GetByCarId(int carId)
         {
             var result = _carImageService.GetByCarId(carId);
             if (result.Success)
@@ -92,7 +92,7 @@ namespace WebAPI.Controllers
             }
             else
             {
-                var image = _carImageService.GetAll(carId).Data.Where(x => x.Id == carImageId).FirstOrDefault();
+                var image = _carImageService.GetAll().Data.Where(x => x.Id == carImageId).FirstOrDefault();
                 string fileName = image.ImagePath;
                 var result = _carImageService.Update(new CarImage
                 {

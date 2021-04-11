@@ -53,5 +53,13 @@ namespace Business.Concrete
             _userDal.Update(user);
             return new SuccessResult(Messages.updatedUser);
         }
+        public IDataResult<User> GetByUserMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+        public IDataResult<User> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
+        }
     }
 }

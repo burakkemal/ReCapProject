@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -37,5 +38,9 @@ namespace Business.Constants
         internal static string SuccessfulLogin="başarılı giriş";
         internal static string UserAlreadyExists= "Kullanıcı zaten var";
         internal static string AccessTokenCreated="Token oluşturuldu";
+        public static string GetErrorCarMessage;
+        public static string GetSuccessCarMessage;
+        public static string succeed ="Başarılı";
+        public static string CustomersListed="Müşteriler listelendi";
     }
 }

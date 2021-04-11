@@ -42,11 +42,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
-        public IDataResult<List<CarImage>> GetAll(int carId)
+        public IDataResult<List<CarImage>> GetAll()
         {
-            var result = _carImageDal.GetAll(x => x.CarId == carId);
-            if (result.Count == 0)
-                result.Add(new CarImage { CarId = carId, ImagePath = "DefaultImage.jpg" });
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
@@ -90,7 +87,7 @@ namespace Business.Concrete
         {
             try
             {
-                string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\Images\default.jpg");
+                string path = @"default.jpg";
                 var result = _carImageDal.GetAll(c => c.CarId == carId).Any();
                 if (!result)
                 {

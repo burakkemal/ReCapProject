@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             _brandService = brandService;
         }
         [HttpGet("getall")]
-        public IActionResult GetAll(Brand brand)
+        public IActionResult GetAll()
         {
             var result = _brandService.GetAll();
             if (result.Success)

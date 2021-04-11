@@ -17,12 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\492b07cb-6240-4014-99af-fab314aebd93_2_27_2021.png" />
-    <None Include="wwwroot\default.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\uploads\" />
+    <None Include="wwwroot\uploads\default.jpg" />
   </ItemGroup>
 
 

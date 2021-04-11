@@ -13,14 +13,9 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.CarName).MinimumLength(2);
             RuleFor(p => p.CarName).NotEmpty();
             RuleFor(p => p.DailyPrice).NotEmpty();
-            RuleFor(p => p.DailyPrice).GreaterThan(0);
-            RuleFor(p => p.DailyPrice).GreaterThanOrEqualTo(10).When(p => p.BrandId == 1);
-            RuleFor(p => p.CarName).Must(StarWithA).WithMessage("Araba ismi a ile başlamıyor.");
+            RuleFor(p => p.DailyPrice).GreaterThan(0);                    
         }
 
-        private bool StarWithA(string arg)
-        {
-            return arg.StartsWith("A");
-        }
+        
     }
 }

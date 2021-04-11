@@ -22,7 +22,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
-            _colorDal.Delete(color);
+            _colorDal.Add(color);
             return new SuccessResult(Messages.Added);
         }
 
@@ -44,7 +44,7 @@ namespace Business.Concrete
         }
         public IResult Update(Color color)
         {
-            _colorDal.Delete(color);
+            _colorDal.Update(color);
             return new SuccessResult();
         }
 
